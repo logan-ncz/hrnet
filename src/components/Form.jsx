@@ -28,60 +28,67 @@ export default function Form() {
         <form onSubmit={handleSubmit} action="#" id="create-employee">
             <label>
                 First Name
-                <input required={true} onChange={handleInputChange} type="text" id="first-name" />
             </label>
+
+            <input required={true} onChange={handleInputChange} type="text" id="first-name" />
 
             <label>
                 Last Name
-                <input required={true} onChange={handleInputChange} type="text" id="last-name" />
             </label>
+
+            <input required={true} onChange={handleInputChange} type="text" id="last-name" />
 
             <label>
                 Date of Birth
-                <input required={true} onChange={handleInputChange} id="date-of-birth" type="date" />
             </label>
+
+            <input required={true} onChange={handleInputChange} id="date-of-birth" type="date" />
 
             <label>
                 Start Date
-                <input required={true} onChange={handleInputChange} id="start-date" type="date" />
             </label>
+
+            <input required={true} onChange={handleInputChange} id="start-date" type="date" />
 
             <fieldset className="address">
                 <legend>Address</legend>
 
                 <label>
                     Street
-                    <input required={true} onChange={handleInputChange} id="street" type="text" />
                 </label>
+
+                <input required={true} onChange={handleInputChange} id="street" type="text" />
 
                 <label>
                     City
-                    <input required={true} onChange={handleInputChange} id="city" type="text" />
                 </label>
+
+                <input required={true} onChange={handleInputChange} id="city" type="text" />
 
                 <label>
                     State
-                    <select required={true} onChange={handleInputChange} name="state" id="state">
-                        <SelectItem items={states} />
-                    </select>
                 </label>
+
+                <select required={true} onChange={handleInputChange} name="state" id="state">
+                    <SelectItem items={states} />
+                </select>
 
                 <label>
                     Zip Code
-                    <input required={true} onChange={handleInputChange} id="zip-code" type="number" />
                 </label>
+
+                <input required={true} onChange={handleInputChange} id="zip-code" type="number" />
             </fieldset>
 
             <label>
                 Department
-                <select required={true} onChange={handleInputChange} name="department" id="department">
-                    <SelectItem items={departments} />
-                </select>
             </label>
 
-            {/* <button onClick="saveEmployee()">Save</button> */}
+            <select required={true} onChange={handleInputChange} name="department" id="department">
+                <SelectItem items={departments} />
+            </select>
+
             <button type="submit">Save</button>
-            
         </form>
     )
 }

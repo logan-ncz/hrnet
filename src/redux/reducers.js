@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const newEmployeeSlice = createSlice({
-    name: 'employee',
+const employeeSlice = createSlice({
+    name: 'employees',
     initialState: {
-        infos: {},
-        confirmation: false
+        newEmployee: {},
+        confirmation: false,
+        employees: {},
     },
     reducers: {
         setInfos: (state, action) => {
@@ -18,7 +19,7 @@ const newEmployeeSlice = createSlice({
 
 
 
-const { actions, reducer } = newEmployeeSlice
+const { actions, reducer } = employeeSlice
 
 export const { setInfos, setConfirmation } = actions;
 

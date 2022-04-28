@@ -4,7 +4,7 @@ import Form from "./components/Form";
 
 
 export default function Home() {
-    const confirmation = useSelector((state) => state.employee.confirmation)
+    const confirmation = useSelector((state) => state.employees.confirmation)
 
     return (
         <div>
