@@ -3,12 +3,18 @@ import { useState } from "react";
 import { setInfos, setConfirmation } from "../redux/reducers";
 import { useDispatch } from "react-redux";
 import Dropdown from "react-dropdown";
+import DatePicker from "react-datepicker";
+
 import 'react-dropdown/style.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Form() {
     const dispatch = useDispatch();
 
     const [ employeeInputs, setEmployeeInputs ] = useState({});
+    const [dateOfBirthValue, dateOfBirthOnChange] = useState(new Date());
+    const [startDateValue, startDateOnChange] = useState(new Date());
+
 
     const statesArray = []
     const departmentArray = []
@@ -29,6 +35,8 @@ export default function Form() {
             ...employeeInputs,
             [inputName]: e.target.value,
         });
+
+        console.log(employeeInputs)
     };
 
     const handleSubmit = (e) => {
@@ -55,13 +63,37 @@ export default function Form() {
                 Date of Birth
             </label>
 
-            <input required={true} onChange={handleInputChange} id="date-of-birth" type="date" />
+            <DatePicker
+                onChange={
+                    (date) => {
+                        const d = new Date(date).toLocaleDateString('fr-FR');
+                        setEmployeeInputs({
+                            ...employeeInputs,
+                            'date-of-birth': d,
+                        });
+                        dateOfBirthOnChange(date)
+                    }
+                } 
+                selected={dateOfBirthValue}
+            />
 
             <label>
                 Start Date
             </label>
 
-            <input required={true} onChange={handleInputChange} id="start-date" type="date" />
+            <DatePicker 
+                onChange={
+                    (date) => {
+                        const d = new Date(date).toLocaleDateString('fr-FR');
+                        setEmployeeInputs({
+                            ...employeeInputs,
+                            'start-date': d,
+                        });
+                        startDateOnChange(date)
+                    }
+                } 
+                selected={startDateValue}
+            />
 
             <fieldset className="address">
                 <legend>Address</legend>
