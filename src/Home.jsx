@@ -7,7 +7,7 @@ export default function Home() {
     const confirmation = useSelector((state) => state.employees.confirmation)
 
     return (
-        <div>
+        <div className="home">
             <div className="title">
                 <h1>HRnet</h1>
             </div>

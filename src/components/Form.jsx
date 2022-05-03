@@ -1,13 +1,26 @@
-import SelectItem from "./SelectItem";
 import { states, departments } from "../data/select";
 import { useState } from "react";
 import { setInfos, setConfirmation } from "../redux/reducers";
 import { useDispatch } from "react-redux";
+import Dropdown from "react-dropdown";
+import 'react-dropdown/style.css';
 
 export default function Form() {
     const dispatch = useDispatch();
 
     const [ employeeInputs, setEmployeeInputs ] = useState({});
+
+    const statesArray = []
+    const departmentArray = []
+
+    const convertStates = (items, itemsArray) => {
+        items.map(item => {
+            return itemsArray.push(item.name)
+        })
+    }
+
+    convertStates(states, statesArray)
+    convertStates(departments, departmentArray)
 
     const handleInputChange = (e) => {
         const inputName = e.target.id;
@@ -69,9 +82,7 @@ export default function Form() {
                     State
                 </label>
 
-                <select required={true} onChange={handleInputChange} name="state" id="state">
-                    <SelectItem items={states} />
-                </select>
+                <Dropdown options={statesArray} onChange={handleInputChange} value={statesArray[0]} placeholder="Select an option" />
 
                 <label>
                     Zip Code
@@ -84,9 +95,7 @@ export default function Form() {
                 Department
             </label>
 
-            <select required={true} onChange={handleInputChange} name="department" id="department">
-                <SelectItem items={departments} />
-            </select>
+            <Dropdown options={departmentArray} onChange={handleInputChange} value={departmentArray[0]} placeholder="Select an option" />
 
             <button type="submit">Save</button>
         </form>
