@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Form from "./components/Form";
+import Modal from "./components/Modal";
 
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
                 <Form />
             </div>
 
-            {confirmation && <div id="confirmation" className="modal">Employee Created!</div>}
+            {confirmation && <Modal />}
         </div>
     )
 }

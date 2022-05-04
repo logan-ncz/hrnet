@@ -45,16 +45,21 @@ const rowsPerPageOptions = [10, 25, 50, 100]
 
 export default function EmployeeList() {
     return (
-        <div id="employee-div" className="container">
+        <div className="employeeList">
             <h1>Current Employees</h1>
-            <DataTable
-                columns={columns}
-                data={mockEmployees}
-                selectableRows
-                pagination
-                paginationRowsPerPageOptions={rowsPerPageOptions}
-            />
-            <Link to='/'>Home</Link>
+
+            <div id="employee-div" className="container">
+                <Link to='/' className="homeLink">Home</Link>
+
+                <DataTable
+                    columns={columns}
+                    data={mockEmployees}
+                    selectableRows
+                    pagination
+                    paginationRowsPerPageOptions={rowsPerPageOptions}
+                />
+            </div>
         </div>
+        
     )
 }

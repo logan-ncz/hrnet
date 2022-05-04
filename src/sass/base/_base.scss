@@ -42,3 +42,21 @@ code {
         }
     }
 }
+
+.employeeList {
+    margin: 2em 1em;
+
+    h1 {
+        text-align: center;
+    }
+
+    a {
+        font-size: 26px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
