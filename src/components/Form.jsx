@@ -51,13 +51,13 @@ export default function Form() {
                 First Name
             </label>
 
-            <input required={true} onChange={handleInputChange} type="text" id="first-name" />
+            <input onChange={handleInputChange} type="text" id="first-name" />
 
             <label>
                 Last Name
             </label>
 
-            <input required={true} onChange={handleInputChange} type="text" id="last-name" />
+            <input onChange={handleInputChange} type="text" id="last-name" />
 
             <label>
                 Date of Birth
@@ -102,13 +102,13 @@ export default function Form() {
                     Street
                 </label>
 
-                <input required={true} onChange={handleInputChange} id="street" type="text" />
+                <input onChange={handleInputChange} id="street" type="text" />
 
                 <label>
                     City
                 </label>
 
-                <input required={true} onChange={handleInputChange} id="city" type="text" />
+                <input onChange={handleInputChange} id="city" type="text" />
 
                 <label>
                     State
@@ -120,7 +120,7 @@ export default function Form() {
                     Zip Code
                 </label>
 
-                <input required={true} onChange={handleInputChange} id="zip-code" type="number" />
+                <input onChange={handleInputChange} id="zip-code" type="number" />
             </fieldset>
 
             <label>
