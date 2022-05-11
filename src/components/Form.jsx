@@ -1,32 +1,38 @@
 import { states, departments } from "../data/select";
 import { useState } from "react";
-import { setInfos, setConfirmation } from "../redux/reducers";
-import { useDispatch } from "react-redux";
+import { setPushAnEmployee } from "../redux/reducers";
+import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-dropdown";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
+import fr from 'date-fns/locale/fr';
+// import Modal from 'plugin-modal'
+
 
 export default function Form() {
+    registerLocale('fr', fr)
+
     const dispatch = useDispatch();
 
     const [ employeeInputs, setEmployeeInputs ] = useState({});
-    const [dateOfBirthValue, dateOfBirthOnChange] = useState(new Date());
-    const [startDateValue, startDateOnChange] = useState(new Date());
+    const [ dateOfBirthValue, dateOfBirthOnChange ] = useState('');
+    const [ startDateValue, startDateOnChange ] = useState('');
+    const newEmployees = useSelector((state) => state.employees.employees)
+    // const [ displayModal, setDisplayModal ] = useState(false)
 
-
-    const statesArray = []
-    const departmentArray = []
+    const statesArray = [];
+    const departmentArray = [];
 
     const convertStates = (items, itemsArray) => {
         items.map(item => {
             return itemsArray.push(item.name)
         })
-    }
+    };
 
-    convertStates(states, statesArray)
-    convertStates(departments, departmentArray)
+    convertStates(states, statesArray);
+    convertStates(departments, departmentArray);
 
     const handleInputChange = (e) => {
         const inputName = e.target.id;
@@ -39,97 +45,83 @@ export default function Form() {
         console.log(employeeInputs)
     };
 
+    const handleDropdownChange = (e, stateName) => {
+        const inputName = stateName;
+
+        setEmployeeInputs({
+            ...employeeInputs,
+            [inputName]: e.value,
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(setInfos(employeeInputs))
-        dispatch(setConfirmation(true))
+        dispatch(setPushAnEmployee(employeeInputs))
+        // setDisplayModal(true)
+        console.log(newEmployees)
     };
 
     return (
-        <form onSubmit={handleSubmit} action="#" id="create-employee">
-            <label>
-                First Name
-            </label>
+        <form onSubmit={handleSubmit} action="#" id="create-employee" className="form">
 
-            <input onChange={handleInputChange} type="text" id="first-name" />
+            <input onChange={handleInputChange} placeholder='First Name' type="text" id="firstName" />
 
-            <label>
-                Last Name
-            </label>
-
-            <input onChange={handleInputChange} type="text" id="last-name" />
-
-            <label>
-                Date of Birth
-            </label>
+            <input onChange={handleInputChange} placeholder='Last Name' type="text" id="lastName" />
 
             <DatePicker
+                locale='fr'
                 onChange={
                     (date) => {
                         const d = new Date(date).toLocaleDateString('fr-FR');
                         setEmployeeInputs({
                             ...employeeInputs,
-                            'date-of-birth': d,
+                            'dateOfBirth': d,
                         });
                         dateOfBirthOnChange(date)
                     }
                 } 
                 selected={dateOfBirthValue}
+                placeholderText={'Date of Birth'}
+                dateFormat='P'
             />
 
-            <label>
-                Start Date
-            </label>
-
-            <DatePicker 
+            <DatePicker
+                locale='fr'
                 onChange={
                     (date) => {
                         const d = new Date(date).toLocaleDateString('fr-FR');
                         setEmployeeInputs({
                             ...employeeInputs,
-                            'start-date': d,
+                            'startDate': d,
                         });
                         startDateOnChange(date)
                     }
                 } 
                 selected={startDateValue}
+                placeholderText={'Start Date'}
+                dateFormat='P'
             />
 
             <fieldset className="address">
                 <legend>Address</legend>
 
-                <label>
-                    Street
-                </label>
+                <input onChange={handleInputChange} placeholder='Street' id="street" type="text" />
 
-                <input onChange={handleInputChange} id="street" type="text" />
+                <input onChange={handleInputChange} placeholder='City' id="city" type="text" />
 
-                <label>
-                    City
-                </label>
+                <Dropdown className="dropdown" options={statesArray} onChange={(e) => handleDropdownChange(e, 'state')} placeholder='State' />
 
-                <input onChange={handleInputChange} id="city" type="text" />
-
-                <label>
-                    State
-                </label>
-
-                <Dropdown options={statesArray} onChange={handleInputChange} value={statesArray[0]} placeholder="Select an option" />
-
-                <label>
-                    Zip Code
-                </label>
-
-                <input onChange={handleInputChange} id="zip-code" type="number" />
+                <input onChange={handleInputChange} placeholder='Zip Code' id="zipCode" type="number" />
             </fieldset>
 
-            <label>
-                Department
-            </label>
+            <Dropdown className="dropdown" options={departmentArray} onChange={(e) => handleDropdownChange(e, 'department')} placeholder='Department' />
 
-            <Dropdown options={departmentArray} onChange={handleInputChange} value={departmentArray[0]} placeholder="Select an option" />
-
-            <button type="submit">Save</button>
+            <button className="formButton" type="submit">Save</button>
+            {/* {displayModal && 
+                <Modal setDisplay={setDisplayModal}>
+                    Employee Created!
+                </Modal>
+            } */}
         </form>
     )
 }

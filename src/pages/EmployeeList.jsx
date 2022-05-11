@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
-import { mockEmployees } from '../data/MOCK_DATA'
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const columns = [
     {
@@ -82,7 +82,7 @@ const ClearButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 8px 32px;
-  background-color: rgb(41, 121, 255);
+  background-color: #5A6F08;
   border: medium none;
   color: white;
   text-decoration: none;
@@ -94,12 +94,14 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
       <TextField id="search" type="text" placeholder="Filter By Name" aria-label="Search Input" value={filterText} onChange={onFilter} />
       <ClearButton type="button" onClick={onClear}>X</ClearButton>
     </>
-  );
+);
 
 export default function EmployeeList() {
+    const employeesData = useSelector((state) => state.employees.employees);
+
     const [filterText, setFilterText] = useState('');
 	const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-    const filteredItems = mockEmployees.filter(
+    const filteredItems = employeesData.filter(
 		item => item.firstName && item.firstName.toLowerCase().includes(filterText.toLowerCase()),
 	);
 
@@ -119,10 +121,10 @@ export default function EmployeeList() {
     return (
         <div className="employeeList">
             <h1>Current Employees</h1>
+            
+            <Link to='/' className="homeLink">Home</Link>
 
-            <div id="employee-div" className="container">
-                <Link to='/' className="homeLink">Home</Link>
-
+            <div id="employeeList-div" className="container">
                 <DataTable
                     columns={columns}
                     data={filteredItems}

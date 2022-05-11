@@ -1,26 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { mockEmployees } from '../data/MOCK_DATA'
 
 const employeeSlice = createSlice({
     name: 'employees',
     initialState: {
-        newEmployee: {},
-        confirmation: false,
-        employees: {},
+        employees: mockEmployees,
     },
     reducers: {
-        setInfos: (state, action) => {
-            state.infos = action.payload
+        setEmployees: (state, action) => {
+            state.employees = action.payload
         },
-        setConfirmation: (state, action) => {
-            state.confirmation = action.payload
-        },
-    },
+        setPushAnEmployee: (state, action) => {
+            state.employees.push(action.payload)
+        }
+    }
 });
-
-
 
 const { actions, reducer } = employeeSlice
 
-export const { setInfos, setConfirmation } = actions;
+export const { setEmployees, setPushAnEmployee } = actions;
 
 export default reducer

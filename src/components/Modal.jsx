@@ -1,28 +1,52 @@
-import { useDispatch } from "react-redux";
-import { setConfirmation } from "../redux/reducers";
+import styled from "styled-components";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-// import styled from "styled-components";
 
-// const modalDiv = styled.div`
 
-// `
+const ModalDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.50);
+`
 
-export default function Modal() {
-    const dispatch = useDispatch();
+const ModalConfirmation = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 1.9em;
+    width: 50%;
+    border-radius: 5px;
+`
 
+const ModalClose = styled.div`
+    position: relative;
+    top: -1.9em;
+    right: -16.2em;
+    font-size: 1.3em;
+`
+
+export default function Modal(props) {
     const close = () => {
-        dispatch(setConfirmation(false))
+        props.setDisplay(false)
     }
 
     return(
-        <div className="modal">
-            <div className="modalConfirmation">
-                Employee Created!
-                {/* <button onClick={close} className="modalConfirmationClose">Close</button> */}
-                <FontAwesomeIcon onClick={close} icon={faCircleXmark} />
-            </div>
-        </div>
-        
+        <ModalDiv>
+            <ModalConfirmation>
+                {props.children}
+                <ModalClose>
+                    <FontAwesomeIcon onClick={close} icon={faCircleXmark} />
+                </ModalClose>
+                
+            </ModalConfirmation>
+        </ModalDiv>
     )
 }

@@ -1,12 +1,8 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Form from "./components/Form";
-import Modal from "./components/Modal";
 
 
 export default function Home() {
-    const confirmation = useSelector((state) => state.employees.confirmation)
-
     return (
         <div className="home">
             <div className="title">
@@ -20,8 +16,6 @@ export default function Home() {
                 
                 <Form />
             </div>
-
-            {confirmation && <Modal />}
         </div>
     )
 }
