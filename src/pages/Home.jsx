@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Form from "./components/Form";
+import Form from "../components/Form";
 
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
             </div>
 
             <div className="container">
-                <Link to='/employeeList' >View Current Employees</Link>
+                <Link to='/employeeList'>View Current Employees</Link>
 
                 <h2>Create Employee</h2>
                 

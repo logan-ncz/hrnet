@@ -119,7 +119,7 @@ export default function Form() {
             <button className="formButton" type="submit">Save</button>
             {displayModal && 
                 <Modal setDisplay={setDisplayModal}>
-                    Bonjour !
+                    Employee Created!
                 </Modal>
             }
         </form>
