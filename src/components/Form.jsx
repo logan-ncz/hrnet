@@ -8,7 +8,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import fr from 'date-fns/locale/fr';
-// import Modal from 'plugin-modal'
+import Modal from 'plugin-modal'
 
 
 export default function Form() {
@@ -20,7 +20,7 @@ export default function Form() {
     const [ dateOfBirthValue, dateOfBirthOnChange ] = useState('');
     const [ startDateValue, startDateOnChange ] = useState('');
     const newEmployees = useSelector((state) => state.employees.employees)
-    // const [ displayModal, setDisplayModal ] = useState(false)
+    const [ displayModal, setDisplayModal ] = useState(false)
 
     const statesArray = [];
     const departmentArray = [];
@@ -57,7 +57,7 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(setPushAnEmployee(employeeInputs))
-        // setDisplayModal(true)
+        setDisplayModal(true)
         console.log(newEmployees)
     };
 
@@ -117,11 +117,11 @@ export default function Form() {
             <Dropdown className="dropdown" options={departmentArray} onChange={(e) => handleDropdownChange(e, 'department')} placeholder='Department' />
 
             <button className="formButton" type="submit">Save</button>
-            {/* {displayModal && 
+            {displayModal && 
                 <Modal setDisplay={setDisplayModal}>
-                    Employee Created!
+                    Bonjour !
                 </Modal>
-            } */}
+            }
         </form>
     )
 }

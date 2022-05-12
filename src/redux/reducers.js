@@ -7,9 +7,6 @@ const employeeSlice = createSlice({
         employees: mockEmployees,
     },
     reducers: {
-        setEmployees: (state, action) => {
-            state.employees = action.payload
-        },
         setPushAnEmployee: (state, action) => {
             state.employees.push(action.payload)
         }
