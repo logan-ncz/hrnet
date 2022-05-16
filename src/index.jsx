@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import store from './redux/store';
 
-import Home from './Home';
+import Home from './pages/Home';
 import EmployeeList from './pages/EmployeeList';
 
 import './sass/main.scss';
