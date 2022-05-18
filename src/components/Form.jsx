@@ -58,7 +58,6 @@ export default function Form() {
         e.preventDefault()
         dispatch(setPushAnEmployee(employeeInputs))
         setDisplayModal(true)
-        console.log(newEmployees)
     };
 
     return (
