@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import store from './redux/store';
 
@@ -15,6 +15,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route exact path='/' element={<Home />} />
+          <Route path='*' element={<Navigate to='/' />} />
           <Route path='/employeeList' element={<EmployeeList />} />
         </Routes>
       </Router>
