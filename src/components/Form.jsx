@@ -1,7 +1,7 @@
 import { states, departments } from "../data/select";
 import { useState } from "react";
 import { setPushAnEmployee } from "../redux/reducers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Dropdown from "react-dropdown";
 import DatePicker, { registerLocale } from "react-datepicker";
 
@@ -19,7 +19,6 @@ export default function Form() {
     const [ employeeInputs, setEmployeeInputs ] = useState({});
     const [ dateOfBirthValue, dateOfBirthOnChange ] = useState('');
     const [ startDateValue, startDateOnChange ] = useState('');
-    const newEmployees = useSelector((state) => state.employees.employees)
     const [ displayModal, setDisplayModal ] = useState(false)
 
     const statesArray = [];
